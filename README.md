@@ -1,6 +1,6 @@
 # Manten Music (Prueba Técnica)
 
-El sitio contiene tres páginas.
+El sitio contiene cuatro páginas.
 
 1. **Página principal** ("/")
 
