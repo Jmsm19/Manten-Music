@@ -22,6 +22,14 @@ El sitio contiene tres páginas.
 
     - Esta página se muestra cuando el usuario ha intentado ingresas a alguna página protegida como **Home** o **Lista de álbumes** sin primero haber intresado el nombre de usuario en la **Página principal**.
 
+## Usuarios disponibles para "Entrar" en la aplicación
+
+- Jorge
+- Verónica
+- Ailyn
+
+Como el Backend fue realizado con solo lo básico para que la aplicación del Frontend funcione, no existe normalización de los datos, por lo tanto, es necesario ingresar el nombre tal cual con mayúscula inicial para que el backend lo reconozca.
+
 ## Tecnologías usadas
 
 ### Frontend
