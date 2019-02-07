@@ -1,0 +1,29 @@
+html, body {
+  height: 100vh;
+}
+
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --tablet-size: 768px;
+  --phone-size: 576px;
+}
+
+* {
+  font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Helvetica, Verdana, sans-serif;
+}
+
+#__next {
+  height: 100%;
+}
+
+.page-loading {
+  width: 100vw;
+  align-items: center;
+  display: grid;
+  justify-content: center;
+}
