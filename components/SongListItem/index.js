@@ -1,21 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import StyledSongItem from '../../styles/components/SongItem';
 
 function SongListItem({ title, selectSong, selectedSong }) {
   return (
-    <>
-      <button type='button' onClick={() => selectSong(title)}>
-        <h4>{title}</h4>
-        {selectedSong === title && <p>Reproduciendo...</p>}
-      </button>
-    </>
+    title && (
+      <StyledSongItem>
+        <button type='button' onClick={() => selectSong(title)}>
+          <h4>
+            {selectedSong && selectedSong.title === title && <i className='fas fa-play' />}
+            {title}
+          </h4>
+        </button>
+      </StyledSongItem>
+    )
   );
 }
 
+SongListItem.defaultProps = {
+  selectedSong: null,
+  title: null,
+};
+
 SongListItem.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   selectSong: PropTypes.func.isRequired,
-  selectedSong: PropTypes.string.isRequired,
+  selectedSong: PropTypes.shape({
+    title: PropTypes.string,
+  }),
 };
 
 export default SongListItem;

@@ -8,13 +8,17 @@ function AlbumList({ albums }) {
   return (
     <MusicContextConsumer>
       {({ selectedAlbum, selectAlbum }) => (
-        <List
-          data={albums}
-          emptyText='No hay albumes disponibles'
-          selectAlbum={selectAlbum}
-          selectedAlbum={selectedAlbum}
-          component={AlbumListItem}
-        />
+        <div className='albums-list'>
+          <h2 className='list-title'>Álbumes</h2>
+
+          <List
+            data={albums}
+            emptyText='No hay albumes disponibles'
+            selectAlbum={selectAlbum}
+            selectedAlbum={selectedAlbum}
+            component={AlbumListItem}
+          />
+        </div>
       )}
     </MusicContextConsumer>
   );

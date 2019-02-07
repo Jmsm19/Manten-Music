@@ -1,13 +1,36 @@
 /* eslint-disable react/sort-comp */
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
+import { GetData } from '../utils/fetch';
 
 const MusicContext = createContext({});
 
 class MusicContextProvider extends Component {
-  selectSong = name => {
+  componentDidMount() {
+    GetData('/artist')
+      .then(res => res.json())
+      .then(({ data }) => {
+        this.setState({
+          musicData: data,
+        });
+      })
+      .catch(error => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
+  }
+
+  selectSong = title => {
     this.setState(prevState => ({
-      selectedSong: prevState.selectedSong === name ? null : name,
+      ...prevState,
+      selectedSong:
+        prevState.selectedSong && prevState.selectedSong.title === title
+          ? null
+          : {
+              title,
+              artist: prevState.selectedArtist,
+              album: prevState.selectedAlbum,
+            },
     }));
   };
 
@@ -20,14 +43,16 @@ class MusicContextProvider extends Component {
   selectArtist = name => {
     this.setState(prevState => ({
       selectedArtist: prevState.selectedArtist === name ? null : name,
+      selectedAlbum: '',
     }));
   };
 
   state = {
+    musicData: [],
     selectSong: this.selectSong,
     selectAlbum: this.selectAlbum,
     selectArtist: this.selectArtist,
-    selectedSong: '',
+    selectedSong: null,
     selectedAlbum: '',
     selectedArtist: '',
   };

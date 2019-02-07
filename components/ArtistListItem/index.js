@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AlbumList from '../AlbumsList';
+import classnames from 'classnames';
+import StyledArtistItem from '../../styles/components/ArtistItem';
 
-function ArtistListItem({ artist, albums, selectArtist, selectedArtist }) {
+function ArtistListItem({ artist, selectArtist, selectedArtist }) {
+  const classNames = classnames({
+    selected: selectedArtist === artist,
+  });
+
   return (
-    <>
-      <button type='button' onClick={() => selectArtist(artist)}>
+    <StyledArtistItem>
+      <button type='button' onClick={() => selectArtist(artist)} className={classNames}>
         <h2>{artist}</h2>
       </button>
-      {selectedArtist === artist && <AlbumList albums={albums} />}
-    </>
+    </StyledArtistItem>
   );
 }
 
-ArtistListItem.defaultProps = {
-  albums: [],
-};
-
 ArtistListItem.propTypes = {
   artist: PropTypes.string.isRequired,
-  albums: PropTypes.arrayOf(PropTypes.shape()),
   selectArtist: PropTypes.func.isRequired,
   selectedArtist: PropTypes.string.isRequired,
 };

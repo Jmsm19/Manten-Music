@@ -6,6 +6,8 @@ import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { Alert, Form } from 'react-bootstrap';
 import StyledForm from '../../styles/components/LoginForm';
+import { StyledButton } from '../../styles/components/Common';
+import Logo from '../Logo';
 
 const LoginForm = ({ handleLogin, serverMessage }) => {
   const initialState = {
@@ -20,14 +22,18 @@ const LoginForm = ({ handleLogin, serverMessage }) => {
     <Formik initialValues={initialState} validationSchema={ValidationSchema} onSubmit={handleLogin}>
       {({ submitForm, isSubmitting, errors, touched }) => (
         <StyledForm>
-          <div>
-            <h1>MANTEN MUSIC</h1>
-          </div>
+          <Logo />
 
-          {serverMessage && <Alert variant='danger'>{serverMessage}</Alert>}
+          {serverMessage && (
+            <Alert variant='danger'>
+              <i className='fas fa-exclamation' /> {serverMessage}
+            </Alert>
+          )}
 
           <div>
-            <Form.Label>Nombre</Form.Label>
+            <Form.Label className={touched.username && errors.username && 'hasError'}>
+              Nombre
+            </Form.Label>
             <Field
               name='username'
               render={({ field }) => (
@@ -47,9 +53,9 @@ const LoginForm = ({ handleLogin, serverMessage }) => {
             />
           </div>
 
-          <button type='submit' disabled={isSubmitting} onClick={submitForm}>
-            {isSubmitting ? 'Entrando...' : 'Entrar'}
-          </button>
+          <StyledButton type='submit' disabled={isSubmitting} onClick={submitForm}>
+            {isSubmitting ? <i className='fas fa-spinner' /> : 'Entrar'}
+          </StyledButton>
         </StyledForm>
       )}
     </Formik>

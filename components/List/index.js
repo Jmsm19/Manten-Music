@@ -10,7 +10,7 @@ function List({ data, emptyText, component, ...rest }) {
 
   const Component = component;
   return (
-    <div>
+    <div className={`list ${rest.className && rest.className}`}>
       {data.map(item => (
         <Component key={uuid()} {...item} {...rest} />
       ))}
@@ -21,11 +21,13 @@ function List({ data, emptyText, component, ...rest }) {
 List.defaultProps = {
   data: [],
   emptyText: null,
+  showNumber: false,
 };
 
 List.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape()),
   emptyText: PropTypes.string,
+  showNumber: PropTypes.bool,
   // eslint-disable-next-line react/forbid-prop-types
   component: PropTypes.any.isRequired,
 };

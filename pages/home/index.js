@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import RequireAuthentication from '../../components/RequireAuthentication';
-import { MusicContextConsumer } from '../../context/MusicContext';
+import { StyledButton } from '../../styles/components/Common';
+import StyledPage from '../../styles/pages/Home';
+import Header from '../../components/Header';
+import ListeningTo from '../../components/ListeningTo';
 
 export class HomePage extends Component {
   state = {};
@@ -10,23 +13,15 @@ export class HomePage extends Component {
     return (
       <RequireAuthentication>
         {({ username }) => (
-          <>
-            <h1>Bienvenido, {username}</h1>
-            <MusicContextConsumer>
-              {({ selectedSong, selectedArtist, selectedAlbum }) =>
-                selectedSong && (
-                  <div>
-                    <p>Estás escuchando: {selectedSong}</p>
-                    <p>Artista: {selectedArtist}</p>
-                    <p>Álbum: {selectedAlbum}</p>
-                  </div>
-                )
-              }
-            </MusicContextConsumer>
+          <StyledPage>
+            <Header username={username} />
+
             <Link href='/list'>
-              <button type='button'>Mis Canciones Favoritas</button>
+              <StyledButton type='button'>Mis Canciones Favoritas</StyledButton>
             </Link>
-          </>
+
+            <ListeningTo />
+          </StyledPage>
         )}
       </RequireAuthentication>
     );

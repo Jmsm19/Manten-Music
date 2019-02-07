@@ -1,35 +1,53 @@
 import React, { Component } from 'react';
 import RequireAuthentication from '../../components/RequireAuthentication';
-import { GetData } from '../../utils/fetch';
 import ArtistsList from '../../components/ArtistsList';
+import StyledPage from '../../styles/pages/List';
+import AlbumList from '../../components/AlbumsList';
+import SongsList from '../../components/SongsList';
+import { MusicContextConsumer } from '../../context/MusicContext';
 
 export class ListPage extends Component {
-  state = {
-    musicData: [],
+  getAlbums = (artists, artistName) => {
+    if (artists.length > 0) {
+      const { albums } = artists.filter(item => item.artist === artistName)[0];
+      return albums;
+    }
+    return [];
   };
 
-  componentDidMount() {
-    GetData('/artist')
-      .then(res => res.json())
-      .then(({ data }) => {
-        this.setState({
-          musicData: data,
-        });
-      })
-      .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      });
-  }
+  getSongs = (artists, artistName, albumName) => {
+    if (artistName && albumName) {
+      const albums = this.getAlbums(artists, artistName);
+      if (albums.length > 0) {
+        const { songs } = albums.filter(album => album.name === albumName)[0];
+        return songs;
+      }
+    }
+    return [];
+  };
 
   render() {
-    const { musicData } = this.state;
     return (
       <RequireAuthentication>
         {() => (
-          <div>
-            <ArtistsList artists={musicData} />
-          </div>
+          <StyledPage>
+            <MusicContextConsumer>
+              {({ musicData, selectedArtist, selectedAlbum }) => (
+                <>
+                  <ArtistsList artists={musicData} />
+
+                  <div className='albums-songs'>
+                    {selectedArtist && (
+                      <AlbumList albums={this.getAlbums(musicData, selectedArtist)} />
+                    )}
+                    {selectedArtist && selectedAlbum && (
+                      <SongsList songs={this.getSongs(musicData, selectedArtist, selectedAlbum)} />
+                    )}
+                  </div>
+                </>
+              )}
+            </MusicContextConsumer>
+          </StyledPage>
         )}
       </RequireAuthentication>
     );

@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Footer from '../Footer';
+import { StyledMain } from '../../styles/components/Common';
+import StyledLayout from '../../styles/components/AuthorizedLayout';
 import Navigation from '../Navigation';
+import Footer from '../Footer';
 
 function AuthorizedLayout({ children }) {
   return (
-    <div>
+    <StyledLayout>
       <Navigation />
-      <main>{children}</main>
+      <StyledMain>{children}</StyledMain>
       <Footer />
-    </div>
+    </StyledLayout>
   );
 }
 

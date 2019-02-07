@@ -1,4 +1,4 @@
-# Music Manten (Prueba Técnica)
+# Manten Music (Prueba Técnica)
 
 El sitio contiene tres páginas.
 
@@ -29,6 +29,7 @@ El sitio contiene tres páginas.
 - React (mediante Next.js).
   - El sitio contiene dos Context (API): uno para el usuario y otro para los artistas, álbumes y canciones seleccionadas.
 - PropTypes.
+- Styled-components.
 - Algo de React-bootstrap.
 - Formik, para manejo de formularios.
 - Eslint (Airbnb) + Prettier

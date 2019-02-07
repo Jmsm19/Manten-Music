@@ -1,30 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SongsList from '../SongsList';
+import classnames from 'classnames';
+import StyledAlbumItem from '../../styles/components/AlbumItem';
 
-function AlbumListItem({ name, year, songs, selectAlbum, selectedAlbum }) {
+function AlbumListItem({ name, year, selectAlbum, selectedAlbum }) {
+  const classNames = classnames({
+    selected: selectedAlbum === name,
+  });
+
   return (
-    <>
-      <button type='button' onClick={() => selectAlbum(name)}>
+    <StyledAlbumItem>
+      <button type='button' onClick={() => selectAlbum(name)} className={classNames}>
         <h3>
-          {name} - {year}
+          {name} <span className='year'>({year})</span>
         </h3>
       </button>
-      {selectedAlbum === name && <SongsList songs={songs} />}
-    </>
+    </StyledAlbumItem>
   );
 }
 
 AlbumListItem.defaultProps = {
-  albums: [],
+  selectedAlbum: '',
 };
 
 AlbumListItem.propTypes = {
   name: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  songs: PropTypes.arrayOf(PropTypes.shape()),
   selectAlbum: PropTypes.func.isRequired,
-  selectedAlbum: PropTypes.string.isRequired,
+  selectedAlbum: PropTypes.string,
 };
 
 export default AlbumListItem;

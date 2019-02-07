@@ -8,13 +8,18 @@ function SongsList({ songs }) {
   return (
     <MusicContextConsumer>
       {({ selectedSong, selectSong }) => (
-        <List
-          data={songs}
-          emptyText='No hay canciones disponibles para este album'
-          selectedSong={selectedSong}
-          selectSong={selectSong}
-          component={SongListItem}
-        />
+        <div className='songs-list'>
+          <h2 className='list-title'>Canciones</h2>
+
+          <List
+            showNumber
+            data={songs}
+            emptyText='No hay canciones disponibles para este album'
+            selectedSong={selectedSong}
+            selectSong={selectSong}
+            component={SongListItem}
+          />
+        </div>
       )}
     </MusicContextConsumer>
   );

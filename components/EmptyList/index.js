@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import StyledEmptyList from '../../styles/components/EmptyList';
 
 function EmtpyList({ emptyText }) {
   return (
-    <div>
+    <StyledEmptyList>
       <p>{emptyText}</p>
-    </div>
+    </StyledEmptyList>
   );
 }
 
