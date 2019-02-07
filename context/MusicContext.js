@@ -27,9 +27,9 @@ class MusicContextProvider extends Component {
     selectSong: this.selectSong,
     selectAlbum: this.selectAlbum,
     selectArtist: this.selectArtist,
-    selectedSong: null,
-    selectedAlbum: null,
-    selectedArtist: null,
+    selectedSong: '',
+    selectedAlbum: '',
+    selectedArtist: '',
   };
 
   render() {

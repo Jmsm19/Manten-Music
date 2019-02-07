@@ -24,6 +24,8 @@ const LoginForm = ({ handleLogin, serverMessage }) => {
             <h1>MANTEN MUSIC</h1>
           </div>
 
+          {serverMessage && <Alert variant='danger'>{serverMessage}</Alert>}
+
           <div>
             <Form.Label>Nombre</Form.Label>
             <Field
@@ -34,6 +36,7 @@ const LoginForm = ({ handleLogin, serverMessage }) => {
                     {...field}
                     id='username'
                     type='text'
+                    onKeyPress={({ key }) => key === 'Enter' && submitForm()}
                     autoComplete='name'
                     isInvalid={touched.username && errors.username}
                     required
@@ -44,13 +47,8 @@ const LoginForm = ({ handleLogin, serverMessage }) => {
             />
           </div>
 
-          {serverMessage && (
-            <Alert variant='danger'>
-              <p>{serverMessage}</p>
-            </Alert>
-          )}
           <button type='submit' disabled={isSubmitting} onClick={submitForm}>
-            Entrar
+            {isSubmitting ? 'Entrando...' : 'Entrar'}
           </button>
         </StyledForm>
       )}

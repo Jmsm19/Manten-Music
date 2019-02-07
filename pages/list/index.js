@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
 import RequireAuthentication from '../../components/RequireAuthentication';
 import { GetData } from '../../utils/fetch';
 import ArtistsList from '../../components/ArtistsList';
@@ -28,12 +27,9 @@ export class ListPage extends Component {
     return (
       <RequireAuthentication>
         {() => (
-          <>
-            <ArtistsList data={musicData} />
-            <Link href='/home'>
-              <a>Home</a>
-            </Link>
-          </>
+          <div>
+            <ArtistsList artists={musicData} />
+          </div>
         )}
       </RequireAuthentication>
     );

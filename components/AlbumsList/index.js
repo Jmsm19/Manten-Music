@@ -1,44 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uuid from 'uuid/v4';
-import SongsList from '../SongsList';
 import { MusicContextConsumer } from '../../context/MusicContext';
+import List from '../List';
+import AlbumListItem from '../AlbumListItem';
 
-function AlbumList({ data }) {
-  if (data.length === 0) {
-    return (
-      <div>
-        <p>No hay albumes disponibles</p>
-      </div>
-    );
-  }
-
+function AlbumList({ albums }) {
   return (
     <MusicContextConsumer>
-      {({ selectedAlbum, selectAlbum }) =>
-        data &&
-        data.map(({ name, year, songs }) => (
-          <div key={uuid()}>
-            <button type='button' onClick={() => selectAlbum(name)}>
-              <h3>
-                {name} - {year}
-              </h3>
-            </button>
-            {selectedAlbum === name && <SongsList data={songs} />}
-          </div>
-        ))
-      }
+      {({ selectedAlbum, selectAlbum }) => (
+        <List
+          data={albums}
+          emptyText='No hay albumes disponibles'
+          selectAlbum={selectAlbum}
+          selectedAlbum={selectedAlbum}
+          component={AlbumListItem}
+        />
+      )}
     </MusicContextConsumer>
   );
 }
 
 AlbumList.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      artist: PropTypes.string,
-      albums: PropTypes.shape(),
-    }),
-  ).isRequired,
+  albums: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default AlbumList;
